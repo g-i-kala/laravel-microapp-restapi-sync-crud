@@ -9,6 +9,3 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/sync/fakestore', [FakeStoreApiSyncController::class, 'sync']);
-Route::get('/debug-test', function () {
-    return response()->json(['ok' => true]);
-});

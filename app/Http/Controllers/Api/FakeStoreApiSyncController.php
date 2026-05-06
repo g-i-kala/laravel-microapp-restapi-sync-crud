@@ -11,7 +11,10 @@ class FakeStoreApiSyncController extends Controller
     {
         // pobrac produkty
         $response = Http::get('https://fakestoreapi.com/products');
-        //dd($response->json());
+
+        if ($response->failed()) {
+            return response()->json(['message' => 'Faild to fetch products'], 502);
+        };
         // debug wyswietlic co sie popbralo
         $items = $response->json();
 

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\FakeStoreApiSyncController;
+use App\Http\Controllers\FakeStoreApiSyncController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
