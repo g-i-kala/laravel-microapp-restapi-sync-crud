@@ -34,7 +34,7 @@ class ProductController extends Controller
     {
         $item = $request->json()->all();
 
-        // validation
+        // validation ?
 
         $product = $this->productService->updateOrCreate($item);
 
@@ -46,7 +46,9 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = $this->productService->getSingle($id);
+
+        return response()->json($product, 200);
     }
 
     /**
@@ -62,6 +64,8 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $response = $this->productService->deleteSingle($id);
+
+        return $response;
     }
 }

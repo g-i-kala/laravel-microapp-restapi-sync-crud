@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Http\JsonResponse;
 
 class ProductService
 {
@@ -28,6 +29,39 @@ class ProductService
                 'category_id' => $category->id,
             ]
         );
+    }
+
+    /**
+     * Get single product from db
+     * with the given id
+     * */
+
+    public function getSingle(string $id): Product
+    {
+        $product = Product::findOrFail($id);
+
+        return $product;
+    }
+
+    /**
+    * Delete single product from db
+    * with the given id
+    * */
+
+    public function deleteSingle(string $id): JsonResponse
+    {
+        $product = Product::findOrFail($id);
+        if ($product) {
+            $product->delete();
+        } else {
+            return response()->json([
+                'error' => 'Delete unsucessfull.',
+            ]);
+        }
+
+        return response()->json([
+                'message' => 'Delete sucessfull.',
+            ]);
     }
 
 }
