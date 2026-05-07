@@ -20,7 +20,6 @@
                     <th>API ID</th>
                     <th>Title</th>
                     <th>Category</th>
-                    <th>Category Name</th>
                     <th>Price</th>
                 </tr>
             </thead>
@@ -29,7 +28,6 @@
                     <tr>
                         <td>{{ $item['external_id'] }}</td>
                         <td>{{ $item['name'] }}</td>
-                        <td>{{ $item['category_id'] }}</td>
                         <td>{{ $item['category_name'] }}</td>
                         <td>{{ $item['price'] }}</td>
                     </tr>

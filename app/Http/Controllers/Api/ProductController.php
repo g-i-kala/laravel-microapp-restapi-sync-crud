@@ -4,10 +4,16 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function __construct(
+        private ProductService $productService
+    ) {
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -26,7 +32,13 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $item = $request->json()->all();
+
+        // validation
+
+        $product = $this->productService->updateOrCreate($item);
+
+        return response()->json($product, 201);
     }
 
     /**

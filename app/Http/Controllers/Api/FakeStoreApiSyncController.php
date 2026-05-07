@@ -5,10 +5,15 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Services\ProductService;
 use Illuminate\Support\Facades\Http;
 
 class FakeStoreApiSyncController extends Controller
 {
+    public function __construct(private ProductService $productService)
+    {
+    }
+
     public function sync()
     {
         // get the products
@@ -22,25 +27,14 @@ class FakeStoreApiSyncController extends Controller
 
         // add products to db
         foreach ($items as $item) {
-            $category = Category::firstOrCreate([
-                'name' => $item['category'],
-            ]);
-
-            Product::updateOrCreate(
-                ['external_id' => $item['id']],
-                [
-                    'name' => $item['title'],
-                    'price' => $item['price'],
-                    'description' => $item['description'],
-                    'category_id' => $category->id ?? 1,
-                ]
-            );
+            $item['name'] = $item['title'];
+            $this->productService->updateOrCreate($item);
         }
 
         // json return
         return response()->json([
             'count' => count($items),
             'message' => 'Sync completed.',
-        ]);
+        ], 200);
     }
 }
