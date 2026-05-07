@@ -17,6 +17,7 @@
         <table border="1" cellpadding="5">
             <thead>
                 <tr>
+                    <th>Local ID</th>
                     <th>API ID</th>
                     <th>Title</th>
                     <th>Category</th>
@@ -26,6 +27,7 @@
             <tbody>
                 @foreach ($items as $item)
                     <tr>
+                        <td>{{ $item['id'] }}</td>
                         <td>{{ $item['external_id'] }}</td>
                         <td>{{ $item['name'] }}</td>
                         <td>{{ $item['category_name'] }}</td>
